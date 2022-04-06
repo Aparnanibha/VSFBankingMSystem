@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BankingManagementSystem.Models.CustomerAcc>
+
+@{
+    ViewData["Title"] = "AccountSummary";
+}
+
+<h1>AccountSummary</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalBalance)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalBalance)
+            </td>
+
+
+        </tr>
+}
+    </tbody>
+</table>
