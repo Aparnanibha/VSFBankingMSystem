@@ -11,6 +11,7 @@ namespace BankingManagementSystem.Models
         public decimal? AccountNumber { get; set; }
         public string? Maturityinstruct { get; set; }
         public DateTime? TransactionDate { get; set; }
+        public string? DebitCredit { get; set; }
 
         public virtual CustomerAcc? AccountNumberNavigation { get; set; }
     }
