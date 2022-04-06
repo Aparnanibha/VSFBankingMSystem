@@ -17,11 +17,6 @@ namespace BankingManagementSystem.Controllers
             return View();
         }
 
-        public IActionResult AccountDetails()
-        {
-            return View();
-        }
-
         public IActionResult Statements()
         {
             //var res = db.CustomerAccs.Include(c => c.TransactionDetails).Include(c => c.Customer);
@@ -51,6 +46,23 @@ namespace BankingManagementSystem.Controllers
             }).ToList();
 
             return View(res1);
+        }
+
+        public IActionResult AccountSummary()
+        {
+            //List<CustomerAcc> customerAccs = _db.CustomerAccs.ToList();
+            var result = (from details in db.CustomerAccs
+                          where details.CustomerId == "1001"
+                          select details).ToList();
+            return View(result);
+        }
+        public IActionResult AccountDetails()
+        {
+            //List<TransactionDetail> transactionDetails = _db.TransactionDetails.ToList();
+            var result = (from details in db.TransactionDetails
+                          where details.AccountNumber == 200106300808
+                          select details).ToList();
+            return View(result);
         }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using BankingManagementSystem.Models;
+using VSFBankingSystem.Models;
 
 namespace BankingManagementSystem.Models
 {
@@ -284,7 +285,7 @@ namespace BankingManagementSystem.Models
             {
                 entity.ToTable("registrations");
 
-                entity.Property(e => e.Password).HasColumnName("password");
+                entity.Property(e => e.password).HasColumnName("password");
             });
 
             modelBuilder.Entity<TransactionDetail>(entity =>
