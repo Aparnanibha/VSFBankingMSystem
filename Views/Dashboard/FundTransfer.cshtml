@@ -1,0 +1,22 @@
+
+@{
+    ViewData["Title"] = "FundTransfer";
+}
+
+<h1>Fund Transfer</h1>
+<div class="card-columns col-sm-12">
+    <div class="card bg-light m-2 w-25">
+      <div class="card-body text-center ">
+        <p class="card-text"><a asp-controller = "Dashboard" asp-action=Payment>Make Payment Through NEFT</a></p>
+      </div>
+    </div>
+    <div class="card bg-light m-2 w-25">
+      <div class="card-body text-center">
+        <p class="card-text"><a asp-controller = "Dashboard" asp-action=Payment>Make Payment Through RTGS</a></p>
+      </div>
+    </div>
+    <div class="card bg-light m-2 w-25">
+      <div class="card-body text-center">
+        <p class="card-text"><a asp-controller = "Dashboard" asp-action=ThroughtNeft>Make Payment Through IMPS</a></p>
+      </div>
+
