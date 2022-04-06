@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankingManagementSystem.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,6 +26,6 @@ namespace VSFBankingSystem.Models
         [Display(Name ="Nick Name")]
         public string? NickName { get; set; }
 
-        //public virtual CustomerAcc? AccountNumberNavigation { get; set; }
+        public virtual CustomerAcc? AccountNumberNavigation { get; set; }
     }
 }

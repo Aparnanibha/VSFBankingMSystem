@@ -17,11 +17,6 @@ namespace BankingManagementSystem.Controllers
             return View();
         }
 
-        public IActionResult AccountDetails()
-        {
-            return View();
-        }
-
         public IActionResult Statements()
         {
             //var res = db.CustomerAccs.Include(c => c.TransactionDetails).Include(c => c.Customer);
@@ -51,10 +46,6 @@ namespace BankingManagementSystem.Controllers
             }).ToList();
 
             return View(res1);
-        }
-        public IActionResult Payment()
-        {
-            return View();
         }
     }
 }
