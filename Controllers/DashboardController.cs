@@ -52,5 +52,9 @@ namespace BankingManagementSystem.Controllers
 
             return View(res1);
         }
+        public IActionResult Payment()
+        {
+            return View();
+        }
     }
 }
