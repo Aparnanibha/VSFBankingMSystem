@@ -14,7 +14,7 @@ namespace BankingManagementSystem.Models
         public decimal AccountNumber { get; set; }
         public string? Status { get; set; }
         public string? CustomerId { get; set; }
-        public double TotalBalance { get; set; }
+        public decimal TotalBalance { get; set; }
 
         public virtual Customer? Customer { get; set; }
         public virtual ICollection<RegisterNetBanking> RegisterNetBankings { get; set; }
