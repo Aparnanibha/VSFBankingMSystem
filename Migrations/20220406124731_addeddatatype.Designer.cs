@@ -4,6 +4,7 @@ using BankingManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankingManagementSystem.Migrations
 {
     [DbContext(typeof(BankingManagementContext))]
-    partial class BankingManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20220406124731_addeddatatype")]
+    partial class addeddatatype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -415,9 +417,6 @@ namespace BankingManagementSystem.Migrations
                     b.Property<decimal?>("AccountNumber")
                         .IsRequired()
                         .HasColumnType("numeric(12,0)");
-
-                    b.Property<decimal?>("Amount")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("DebitCredit")
                         .HasColumnType("nvarchar(max)");

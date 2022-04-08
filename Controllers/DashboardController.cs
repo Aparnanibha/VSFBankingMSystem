@@ -28,7 +28,7 @@ namespace BankingManagementSystem.Controllers
         [HttpPost]
         public IActionResult Statements(DateTime From, DateTime To)
         {
-            var res = db.TransactionDetails.Where(c => c.TransactionDate >= From && c.TransactionDate <= To).ToList();
+            //var res = db.TransactionDetails.Where(c => c.TransactionDate >= From && c.TransactionDate <= To).ToList();
             var res1 = (from t in db.TransactionDetails
                        join c in db.CustomerAccs
                        on t.AccountNumber equals c.AccountNumber

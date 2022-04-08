@@ -1,4 +1,4 @@
-html {
+/*html {
     font-size: 14px;
 }
 
@@ -11,18 +11,18 @@ html {
 html {
     position: relative;
     min-height: 100%;
-}
+}*/
 
-.bg {
-    background-image: url('https://previews.123rf.com/images/chormuang/chormuang2105/chormuang210500019/168785814-internet-banking-technology-isometric-illustration-of-bank-on-dark-blue-technology-background-digita.jpg');
+/*.bg {
+    background-image: url('https://previews.123rf.com/images/chormuang/chormuang2105/chormuang210500019/168785814-internet-banking-technology-isometric-illustration-of-bank-on-dark-blue-technology-background-digita.jpg');*/
     /*  border: 2px solid black;*/
     /*backdrop-filter: blur(5px);*/
-    background-repeat: no-repeat;
+    /*background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
-}
+}*/
 
-main {
+/*main {
     color: white;
 }
 
@@ -37,9 +37,9 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    text-align: center;
-    background: lightgray;
-}
+    text-align: center;*/
+   /* background: lightgray;*/
+/*}*/
 
 /*.col-sm-4 {
     background-color: lightgrey;
@@ -51,7 +51,7 @@ footer {
     margin-left:20px;
 }
 */
-.right-container {
+/*.right-container {
     margin-left: 30px;
     background: #fff;
     height: 400px;
@@ -115,5 +115,129 @@ footer {
 
                 .wrapper .sidebar ul li:hover a {
                     color: #fff;
+                }*/
+
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.bg {
+    /*background-image: url('https://previews.123rf.com/images/chormuang/chormuang2105/chormuang210500019/168785814-internet-banking-technology-isometric-illustration-of-bank-on-dark-blue-technology-background-digita.jpg');
+    border: 2px solid black;
+    backdrop-filter: blur(5px);*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+
+main {
+    color: white;
+}
+
+.details {
+    background-color: gainsboro;
+    margin: 20px;
+    padding: 20px;
+    color: black;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background: lightgray;
+}
+
+/*.col-sm-4 {
+    background-color: lightgrey;
+    height:400px;
+    width: 350px;
+    border: 2px solid black;
+    padding: 50px;
+    padding-left: 20px;
+    margin-left:20px;
+}
+*/
+.right-container {
+    margin-left: 30px;
+    background: #fff;
+    height: 400px;
+    padding: 30px;
+    padding-left: 10px;
+    border: 2px solid #000;
+}
+
+.login-container {
+    margin-left: auto;
+    margin-right: auto;
+    height: 400px;
+    width: 500px;
+    overflow-wrap: normal;
+}
+
+.form-group {
+    margin: 20px;
+    margin-bottom: 10px;
+}
+
+.wrapper {
+    display: flex;
+    position: absolute;
+}
+
+    .wrapper .sidebar {
+        width: 200px;
+        height: 100%;
+        background: lightgrey;
+        padding: 30px 0px;
+        position: fixed;
+    }
+
+        .wrapper .sidebar h2 {
+            color: black;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .wrapper .sidebar ul li {
+            padding: 15px;
+            border-bottom: 1px solid #bdb8d7;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+            .wrapper .sidebar ul li a {
+                color: black;
+                display: block;
+            }
+
+                .wrapper .sidebar ul li a .fas {
+                    width: 25px;
                 }
 
+            .wrapper .sidebar ul li:hover {
+                background-color: #594f8d;
+            }
+
+                .wrapper .sidebar ul li:hover a {
+                    color: #fff;
+                }
+
+th, td {
+    /*color: white;*/
+}

@@ -4,6 +4,7 @@ using BankingManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,13 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankingManagementSystem.Migrations
 {
     [DbContext(typeof(BankingManagementContext))]
-    partial class BankingManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20220406050010_AddingDebitCreditColumn")]
+    partial class AddingDebitCreditColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -333,8 +335,8 @@ namespace BankingManagementSystem.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(40)");
 
-                    b.Property<decimal>("TotalBalance")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("TotalBalance")
+                        .HasColumnType("float");
 
                     b.HasKey("AccountNumber")
                         .HasName("PK__Customer__BE2ACD6EC7DC61E5");
@@ -413,27 +415,20 @@ namespace BankingManagementSystem.Migrations
                         .HasColumnType("varchar(12)");
 
                     b.Property<decimal?>("AccountNumber")
-                        .IsRequired()
                         .HasColumnType("numeric(12,0)");
-
-                    b.Property<decimal?>("Amount")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("DebitCredit")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Maturityinstruct")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .IsUnicode(false)
                         .HasColumnType("varchar(40)");
 
                     b.Property<decimal?>("ToAccountNumber")
-                        .IsRequired()
                         .HasColumnType("numeric(12,0)");
 
                     b.Property<DateTime?>("TransactionDate")
-                        .IsRequired()
                         .HasColumnType("date");
 
                     b.Property<string>("TransactionType")
@@ -557,8 +552,6 @@ namespace BankingManagementSystem.Migrations
                     b.HasOne("BankingManagementSystem.Models.CustomerAcc", "AccountNumberNavigation")
                         .WithMany("TransactionDetails")
                         .HasForeignKey("AccountNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_AccNum_Tr");
 
                     b.Navigation("AccountNumberNavigation");

@@ -1,0 +1,67 @@
+﻿@using static BankingManagementSystem.Models.TransactionDetail
+@model BankingManagementSystem.Models.TransactionDetail
+
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<h1>Payment</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PaymentNEFT">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                @*<h1><label asp-for="TransactionType" class="control-label"></label></h1>*@
+                <label><h1>NEFT Payment</h1></label>
+                
+                @*<input asp-for="TransactionType" class="form-control" />*@
+                @*@Html.DropDownListFor(m=> m.TransactionType,new SelectList(Enum.GetValues(typeof(TransMode))),"Select Transaction Mode")*@
+               @* <select class="form-control" id="Transmode" name="Transmode">
+                    <option value = "NEFT">NEFT</option> 
+                    <option value = "RTGS">RTGS</option> 
+                    <option value = "IMPS">IMPS</option> 
+                </select>*@
+                @*@Html.DropDownList("TransactionMode",new List<SelectListItem>()
+                    {
+                        new SelectListItem(){Text = "NEFT",Value = "NEFT"},
+                        new SelectListItem(){Text = "RTGS",Value = "RTGS"},
+                        new SelectListItem(){Text = "IMPS",Value = "IMPS"}
+                    },"Select Transaction Mode")*@
+                @*<span asp-validation-for="TransactionType" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountNumber" class="control-label"></label>
+                @*<select asp-for="AccountNumber" asp-items = "@(new SelectList(ViewBag.accs,"AccountNumber","AccountNumber"))" class = "form-control"></select>*@
+
+                <select asp-for="AccountNumber" class ="form-control" asp-items="ViewBag.Accs"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ToAccountNumber" class="control-label"></label>
+                @*<select asp-for="ToAccountNumber" asp-items = "@(new SelectList(ViewBag.Payees,"AccountNumber","AccountNumber"))" class = "form-control"></select>
+                *@@*<input asp-for="ToAccountNumber" class="form-control" />
+                <span asp-validation-for="ToAccountNumber" class="text-danger"></span>*@
+                <select asp-for="AccountNumber" class ="form-control" asp-items="ViewBag.Payees"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input type="number" asp-for="Amount" class="form-control" min = "1" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Maturityinstruct" class="control-label"></label>
+                <input asp-for="Maturityinstruct" class="form-control" />
+                <span asp-validation-for="Maturityinstruct" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Make Payment" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
