@@ -2,85 +2,78 @@
 
 @{
 	ViewData["Title"] = "Satements";
-    //List<CustomerAcc> customerAccs = Model;
+	Layout = "_DashboardLayout";
+	//List<CustomerAcc> customerAccs = Model;
 }
 
-<h1>Satements</h1>
+<h1 class="text-center">Satements</h1>
 
 
 
-@*@foreach (var item in Model)
-{
-	@item.AccountNumber <br />
-	@item.TransactionType
-}
-*@
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<form asp-action="Statements" method="post">
-    
-    <div class="form-group">
-	<label>  Statement From:</label>
-	<input type="text" id="From" name="From">
+
+<div class="" style="text-align:right;">
+	<form asp-action="Statements" method="post">
+
+		<div class="form-group">
+			<label>  Statement From:</label>
+			<input type="text" id="From" name="From">
+		</div>
+
+
+		<div class="form-group">
+			<label>  To:</label>
+			<input type="text" id="To" name="To">
+
+		</div>
+
+		<input class="btn btn-primary" type="submit" value="search" />
+
+	</form>
 </div>
 
-<div class="form-group">
-	<label>  To:</label>
-	<input type="text" id="To" name="To">
-
-</div>
-
-<input type="submit" value="search" />
-
-
-</form>
 
 @if (Model != null)
 {
+	<div class="bg-white text-dark" style="top:50%; position:absolute; width:80%; height:50%;margin-left: 220px">
+		<table class="table table-bordered" style="width:100%; height:100%; position:relative">
+			<thead>
+				<tr>
+					<th>
+						<label> Account Number </label>
+					</th>
+					<th>
+						<label> Name </label>
+					</th>
+					<th>
+						<label> Account Type </label>
+					</th>
+					<th>
+						<label> Balance </label>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					<tr>
+						<td>
+							@item.transactionDetail.AccountNumber
+						</td>
 
-    <table class="table text-white">
-        <thead>
-            <tr>
-                <th>
-                    <label> Account Number </label>
-                </th>
-                <th>
-                    <label> Name </label>
-                   </th>
-                <th>
-                    <label> Account Type </label>
-                </th>
-                <th>
-                    <label> Balance </label>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @item.transactionDetail.AccountNumber
-                </td>
+						<td>
+							@item.customer.FirstName
+						</td>
+						<td>
+							@item.transactionDetail.TransactionType
+						</td>
+						<td>
+							@item.customerAcc.TotalBalance
+						</td>
 
-                <td>
-                    @item.customer.FirstName
-                </td>
-                <td>
-                    @item.transactionDetail.TransactionType
-                   </td>
-                   <td>
-                    @item.customerAcc.TotalBalance
-                </td>
-                
-                <td>
-                    <a asp-action="Edit" asp-route-id="">Edit</a> |
-                    <a asp-action="Details" asp-route-id="">Details</a> |
-                    <a asp-action="Delete" asp-route-id="">Delete</a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 }

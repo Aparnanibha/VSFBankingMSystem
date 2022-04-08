@@ -63,20 +63,24 @@
 
 			</div>
 
-			<div class="col-sm-4 ">
-				<div class="right-container">
-					<div class="details w-100">
-						<a class="userlogin text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
-					</div>
-					<div class="details w-100">
-						<p> New User? Register</p>
-					</div>
-					<div class="details w-100">
-						<p> Apply Online for Account </p>
-					</div>
-				</div>
-
-			</div>
+<div class = "col-sm-4">
+                <div>
+                    @*<li class="nav-item">
+                        <input type="button" class=".btn btn-lg btn-block nav-link" asp-area="" asp-controller="Home" asp-action="LoginPage" id="login" name="Login" value = "Login"><br>
+                    </li>*@
+					<a asp-controller="User" asp-action="Login">
+                <input type="button" class=".btn btn-lg btn-block btn-primary" id="login" name="Login" value = "Login"><br>
+                   </a>          
+                </div>
+				<hr />
+                <div>
+                    <input type="button" class=".btn btn-lg btn-block btn-primary" id="register" name="Register" value = "New User? Register"><br>
+                </div>
+				<hr />
+                <div>
+                   <input type="button" class = ".btn btn-lg btn-block btn-primary" id="apply" name="Apply" value = "Apply Online for Account"><br>
+                </div>
+            </div>
 		</div>
 	</div>
 

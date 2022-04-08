@@ -1,6 +1,7 @@
 ﻿using BankingManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 
 namespace BankingManagementSystem.Controllers
@@ -66,35 +67,13 @@ namespace BankingManagementSystem.Controllers
         }
         public IActionResult Payment()
 		{
-            ViewData["AccountNumber"] = new SelectList(db.AddPayees, "AccountNumber", "AccountNumber");
+            ViewData["CAccs"] = new SelectList(db.CustomerAccs, "AccountNumber", "AccountNumber");
+            ViewData["Payees"] = new SelectList(db.AddPayees, "AccountNumber", "AccountNumber");
 
             return View();
         }
 
-      //  [HttpPost]
-  //      public IActionResult Payment(TransactionDetail transaction, decimal amt)
-		//{
-  //          var data = db.CustomerAccs.Where(obj => obj.AccountNumber == transaction.AccountNumber).FirstOrDefault();
-  //          if(amt <= data.TotalBalance)
-  //          {
-  //              data.TotalBalance -= amt;
-  //              int mss = db.SaveChanges();
-  //              if(mss > 0)
-  //              {
-  //                  ViewBag.data = "Withdrawl from account processed";
-  //              }
-  //              else
-  //              {
-  //                  ViewBag.data = "Not done";
-  //              }
-  //          }
-  //          else
-  //          {
-  //              ViewBag.data = "Insufficient balance"; 
-  //          }
-
-  //          var data1 = db.CustomerAccs.Where(obj => obj.AccountNumber == transaction.ToAccountNumber).FirstOrDefault();
-  //          data1.TotalBalance += amt;
+  //          data1.TotalBalance += transaction.Amount??1;
   //          int ms = db.SaveChanges();
   //          if(ms > 0)
   //          {
@@ -105,20 +84,50 @@ namespace BankingManagementSystem.Controllers
   //              ViewBag.data1 = "Not deposited";
   //          }
 
-  //          db.TransactionDetails.Add(new TransactionDetail
-  //          {
-  //              TransactionId = "12345df",
-  //              TransactionType = "IMPS",
-  //              ToAccountNumber = transaction.ToAccountNumber,
-  //              AccountNumber = transaction.AccountNumber,
-  //              Maturityinstruct = transaction.Maturityinstruct,
-  //              TransactionDate = transaction.TransactionDate,
-  //              DebitCredit = "DebitCredit"
-  //          });
-  //          db.SaveChanges();
-		//	return RedirectToAction("Index");
-		//}
+        [HttpPost]
+        public IActionResult Payment(TransactionDetail transaction)
+		{
+            if (transaction.AccountNumber != transaction.ToAccountNumber)
+            {
+                //Transfer(transaction);
+                var fromAccount = db.CustomerAccs.Include(x => x.TransactionDetails).First(x => x.AccountNumber == transaction.AccountNumber);
+                decimal amount = transaction.Amount ?? 0;
 
-        
-    }
+                if (transaction.Amount <= fromAccount.TotalBalance)
+                {
+                    fromAccount.TotalBalance -= amount;
+                    db.Update(fromAccount);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    return View();
+                }
+
+                var toAccount = db.CustomerAccs.Include(x => x.TransactionDetails).First(x => x.AccountNumber == transaction.ToAccountNumber);
+                toAccount.TotalBalance += transaction.Amount ?? 0;
+                db.Update(toAccount);
+                db.SaveChanges();
+
+
+                db.TransactionDetails.Add(new TransactionDetail
+                {
+                    TransactionId = GenerateRandomString(12),
+                    TransactionType = "IMPS",
+                    ToAccountNumber = transaction.ToAccountNumber,
+                    AccountNumber = transaction.AccountNumber,
+                    Maturityinstruct = transaction.Maturityinstruct,
+                    TransactionDate = transaction.TransactionDate,
+                    DebitCredit = "Credit",
+                    Amount = transaction.Amount,
+                });
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+			else
+			{
+                return View();
+			}
+        }		
+	}
 }

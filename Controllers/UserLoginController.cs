@@ -7,15 +7,15 @@ namespace BankingManagementSystem.Controllers
     [Route("User/[action]")]
     public class UserLoginController : Controller
     {
-        private readonly ApplicationDbContext db;
+        private readonly BankingManagementContext db;
 
-        public UserLoginController(ApplicationDbContext context)
+        public UserLoginController(BankingManagementContext context)
         {
             db = context;
         }
         public IActionResult Index()
         {
-            List<Registration> registrationList = db.registrations.ToList();
+            List<Registration> registrationList = db.Registrations.ToList();
             return View(registrationList);
         }
 
@@ -29,7 +29,7 @@ namespace BankingManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.registrations.Add(reg);
+                db.Registrations.Add(reg);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -49,7 +49,7 @@ namespace BankingManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var obj = db.registrations.Where(u => u.Id.Equals(login.UserId) &&
+                var obj = db.Registrations.Where(u => u.Id.Equals(login.UserId) &&
                 u.password.Equals(login.Password)).FirstOrDefault();
                 if (obj != null)
                 {
