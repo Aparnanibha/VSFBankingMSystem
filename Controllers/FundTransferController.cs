@@ -101,6 +101,7 @@ namespace BankingManagementSystem.Controllers
                 }
                 else
                 {
+                    ModelState.AddModelError("Amount", "Insufficient Ammount to transfer");
                     return View();
                 }
 
@@ -126,6 +127,7 @@ namespace BankingManagementSystem.Controllers
             }
 			else
 			{
+                ModelState.AddModelError("ToAccountNumber", "Source and destination account should be different");
                 return View();
 			}
         }		

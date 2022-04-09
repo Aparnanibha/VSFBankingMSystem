@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BankingManagementSystem.Models.Registration>
+﻿@model IEnumerable<BankingManagementSystem.Models.RegisterNetBanking>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,12 +16,14 @@
                 @Html.DisplayNameFor(model => model.AccountNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.password)
+                @Html.DisplayNameFor(model => model.CustomerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passwordd)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TransactionPassword)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -31,16 +33,15 @@
                 @Html.DisplayFor(modelItem => item.AccountNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.password)
+                @Html.DisplayFor(modelItem => item.CustomerId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TransactionPassword)
+                @Html.HiddenFor(modelItem => item.Passwordd)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.HiddenFor(modelItem => item.TransactionPassword)
             </td>
+            
         </tr>
 }
     </tbody>
