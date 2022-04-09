@@ -39,16 +39,16 @@
 			<thead>
 				<tr>
 					<th>
-						<label> Account Number </label>
+						@Html.DisplayNameFor(model => model.transactionDetail.AccountNumber)
 					</th>
 					<th>
-						<label> Name </label>
+						@Html.DisplayNameFor(model => model.customer.FirstName)
 					</th>
 					<th>
-						<label> Account Type </label>
+						@Html.DisplayNameFor(model => model.transactionDetail.TransactionType)
 					</th>
 					<th>
-						<label> Balance </label>
+						@Html.DisplayNameFor(model => model.customerAcc.TotalBalance)
 					</th>
 				</tr>
 			</thead>
@@ -57,17 +57,17 @@
 				{
 					<tr>
 						<td>
-							@item.transactionDetail.AccountNumber
+							@Html.DisplayFor(modelItem => item.transactionDetail.AccountNumber)
 						</td>
 
 						<td>
-							@item.customer.FirstName
+							@Html.DisplayFor(modelItem => item.customer.FirstName)
 						</td>
 						<td>
-							@item.transactionDetail.TransactionType
+							@Html.DisplayFor(modelItem => item.transactionDetail.TransactionType)
 						</td>
 						<td>
-							@item.customerAcc.TotalBalance
+							@Html.DisplayFor(modelItem => item.customerAcc.TotalBalance)
 						</td>
 
 

@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Profile";
+    //Layout = "_DashboardLayout";
+}
+
+<h1> Hello Everyone </h1>
+<h1 class="text-center">User Profile</h1>
+<div class="text-center">
+<div class="card-columns col-sm-12" style="margin-left: 600px">
+	<div class="card bg-light m-2 w-25">
+		<div class="card-body text-center ">
+			<p class="card-text"><a asp-controller="UserProfile" asp-action=Details>Profile</a></p>
+		</div>
+	</div>
+	<div class="card bg-light m-2 w-25">
+		<div class="card-body text-center">
+			<p class="card-text"><a asp-controller="FundTransfer" asp-action=PaymentNEFT>Change Password</a></p>
+		</div>
+	</div>
+	<div class="card bg-light m-2 w-25">
+		<div class="card-body text-center">
+			<p class="card-text"><a asp-controller="FundTransfer" asp-action=PaymentNEFT>LogOut</a></p>
+		</div>
+	</div>
+	
+</div>
+</div>
+
+

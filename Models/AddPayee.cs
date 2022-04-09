@@ -8,14 +8,15 @@ namespace VSFBankingSystem.Models
 {
     public partial class AddPayee
     {
+        [Key]
         [Display(Name ="Beneficiary Account Number")]
         public decimal BeneficiaryAccountNumber { get; set; }
 
         [NotMapped]
-        [Display(Name = "Re-Enter Beneficiary Account Number")]
+        [Display(Name = "Confirm Beneficiary Account Number")]
         [Required(ErrorMessage = "Please re-enter account number")]
         [Compare("BeneficiaryAccountNumber", ErrorMessage = "Account Number doesn't match, Type again !")]
-        public string ReBenfAccNo { get; set; }
+        public decimal ReBenfAccNo { get; set; }
 
         [Display(Name ="Account Number")]
         public decimal? AccountNumber { get; set; }

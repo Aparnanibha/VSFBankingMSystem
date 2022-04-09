@@ -1,0 +1,110 @@
+﻿@model IEnumerable<BankingManagementSystem.Models.StatementVM>
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+@foreach(var item in Model){
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelItem => item.customer.FirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelItem => item.customer.MiddleName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.MiddleName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.FathersName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.FathersName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.MobileNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.MobileNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.EmailId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.EmailId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.DateOfBirth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.DateOfBirth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.ResidentialAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.ResidentialAddress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.PermanentAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.PermanentAddress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.OccupationType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.OccupationType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.SourceOfIncome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.SourceOfIncome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.GrossAnnualIncome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.GrossAnnualIncome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.IsDebitCardRequired)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.IsDebitCardRequired)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.EnableNetBanking)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.EnableNetBanking)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.customer.AadharNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => item.customer.AadharNumber)
+        </dd>
+        
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@item?.customer.CustomerId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+}

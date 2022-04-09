@@ -4,6 +4,7 @@ using BankingManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankingManagementSystem.Migrations
 {
     [DbContext(typeof(BankingManagementContext))]
-    partial class BankingManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20220408122001_UpdateCustomerIddatatype")]
+    partial class UpdateCustomerIddatatype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,6 +37,25 @@ namespace BankingManagementSystem.Migrations
                     b.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("BankingManagementSystem.Models.AddPayee1", b =>
+                {
+                    b.Property<decimal>("AccountNumber")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("BeneficiaryAccountNumber")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("BeneficiaryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NickName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AccountNumber", "BeneficiaryAccountNumber");
+
+                    b.ToTable("AddPayees", (string)null);
                 });
 
             modelBuilder.Entity("BankingManagementSystem.Models.AspNetRole", b =>
@@ -450,8 +471,7 @@ namespace BankingManagementSystem.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(40)");
 
-                    b.HasKey("AccountNumber")
-                        .HasName("PK_123");
+                    b.HasIndex("AccountNumber");
 
                     b.ToTable("AddPayee", (string)null);
                 });
@@ -549,8 +569,6 @@ namespace BankingManagementSystem.Migrations
                     b.HasOne("BankingManagementSystem.Models.CustomerAcc", "AccountNumberNavigation")
                         .WithMany()
                         .HasForeignKey("AccountNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_AccNum_AddPay");
 
                     b.Navigation("AccountNumberNavigation");

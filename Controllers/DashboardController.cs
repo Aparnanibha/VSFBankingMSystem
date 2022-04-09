@@ -1,6 +1,7 @@
 ﻿using BankingManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VSFBankingSystem.Models;
 
 namespace BankingManagementSystem.Controllers
 {
@@ -19,16 +20,12 @@ namespace BankingManagementSystem.Controllers
 
         public IActionResult Statements()
         {
-            //var res = db.CustomerAccs.Include(c => c.TransactionDetails).Include(c => c.Customer);
-            //return View(res);
-                //return View(db.TransactionDetails.ToList());
             return View();
         }
 
         [HttpPost]
         public IActionResult Statements(DateTime From, DateTime To)
         {
-            //var res = db.TransactionDetails.Where(c => c.TransactionDate >= From && c.TransactionDate <= To).ToList();
             var res1 = (from t in db.TransactionDetails
                        join c in db.CustomerAccs
                        on t.AccountNumber equals c.AccountNumber
@@ -63,6 +60,30 @@ namespace BankingManagementSystem.Controllers
                           where details.AccountNumber == 200106300808
                           select details).ToList();
             return View(result);
+        }
+
+        public IActionResult Payee()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Payee(AddPayee addPayee)
+        {
+            if (ModelState.IsValid)
+            {
+                db.AddPayees.Add(new AddPayee
+                {
+                    BeneficiaryAccountNumber = addPayee.BeneficiaryAccountNumber,
+                    AccountNumber = addPayee.AccountNumber,
+                    BeneficiaryName = addPayee.BeneficiaryName,
+                    NickName = addPayee.NickName,
+                });
+                // db.AddPayees.Add(addPayee);
+                db.SaveChanges();
+                return RedirectToAction("Index", "FundTransfer");
+            }
+            return View();
         }
     }
 }
