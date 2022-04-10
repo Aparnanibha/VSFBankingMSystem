@@ -341,28 +341,30 @@ namespace BankingManagementSystem.Migrations
 
             modelBuilder.Entity("BankingManagementSystem.Models.RegisterNetBanking", b =>
                 {
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<decimal>("AccountNumber")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("CustomerAccAccountNumber")
                         .HasColumnType("numeric(12,0)");
+
+                    b.Property<string>("CustomerId")
+                        .HasMaxLength(12)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(12)");
 
                     b.Property<string>("Passwordd")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(40)");
 
                     b.Property<string>("TransactionPassword")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(40)");
 
-                    b.HasKey("CustomerId");
+                    b.HasKey("AccountNumber", "CustomerId")
+                        .HasName("PK__Register__24602B23768E2252");
 
-                    b.HasIndex("CustomerAccAccountNumber");
-
-                    b.ToTable("RegisterNetBankings");
+                    b.ToTable("RegisterNetBanking", (string)null);
                 });
 
             modelBuilder.Entity("BankingManagementSystem.Models.Registration", b =>
@@ -527,9 +529,13 @@ namespace BankingManagementSystem.Migrations
 
             modelBuilder.Entity("BankingManagementSystem.Models.RegisterNetBanking", b =>
                 {
-                    b.HasOne("BankingManagementSystem.Models.CustomerAcc", null)
+                    b.HasOne("BankingManagementSystem.Models.CustomerAcc", "AccountNumberNavigation")
                         .WithMany("RegisterNetBankings")
-                        .HasForeignKey("CustomerAccAccountNumber");
+                        .HasForeignKey("AccountNumber")
+                        .IsRequired()
+                        .HasConstraintName("fk_AccNum");
+
+                    b.Navigation("AccountNumberNavigation");
                 });
 
             modelBuilder.Entity("BankingManagementSystem.Models.TransactionDetail", b =>

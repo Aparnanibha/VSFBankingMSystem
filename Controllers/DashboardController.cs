@@ -1,4 +1,5 @@
 ﻿using BankingManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VSFBankingSystem.Models;
@@ -13,6 +14,7 @@ namespace BankingManagementSystem.Controllers
         {
             db = context;
         }
+
         public IActionResult Index()
         {
             return View();

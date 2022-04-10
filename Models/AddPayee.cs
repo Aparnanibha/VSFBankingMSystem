@@ -8,7 +8,6 @@ namespace VSFBankingSystem.Models
 {
     public partial class AddPayee
     {
-        [Key]
         [Display(Name ="Beneficiary Account Number")]
         public decimal BeneficiaryAccountNumber { get; set; }
 

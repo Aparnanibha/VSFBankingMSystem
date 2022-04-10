@@ -21,13 +21,14 @@ namespace BankingManagementSystem.Controllers
 
         public IActionResult PaymentNEFT()
         {
-            //var accs = (from acc in db.CustomerAccs
+            //var accs = (from acc in _db.CustomerAccs
             //            where acc.CustomerId == "1001"
+            //            where acc.Status.Contains("Approved")
             //            select acc).ToList();
             //var payeelist = (from payees in db.AddPayees
             //                 where payees.AccountNumber == 200106300808
             //                 select payees).ToList();
-            var accs = new SelectList(db.CustomerAccs, "AccountNumber", "AccountNumber");
+            var accs = new SelectList(db.CustomerAccs.Where(s => s.Status == "Approved"), "AccountNumber", "AccountNumber");
             var payeelist = new SelectList(db.AddPayees, "AccountNumber", "AccountNumber");
 
 
@@ -61,13 +62,22 @@ namespace BankingManagementSystem.Controllers
             td.Amount = transaction.Amount;
             td.TransactionId = GenerateRandomString(12);
             db.TransactionDetails.Add(td);
+            (from customer in db.CustomerAccs
+             where customer.AccountNumber == transaction.ToAccountNumber
+             select customer).ToList().ForEach(x => x.TotalBalance = x.TotalBalance + transaction.Amount ?? 0);
+
+            (from customer in db.CustomerAccs
+             where customer.AccountNumber == transaction.AccountNumber
+             select customer).ToList().ForEach(x => x.TotalBalance = x.TotalBalance - transaction.Amount ?? 0);
+
+
             db.SaveChanges();
             return View("Index");
 
         }
         public IActionResult Payment()
 		{
-            ViewData["CAccs"] = new SelectList(db.CustomerAccs, "AccountNumber", "AccountNumber");
+            ViewData["CAccs"] = new SelectList(db.CustomerAccs.Where(s => s.Status== "Approved"), "AccountNumber", "AccountNumber");
             ViewData["Payees"] = new SelectList(db.AddPayees, "AccountNumber", "AccountNumber");
 
             return View();
@@ -130,6 +140,42 @@ namespace BankingManagementSystem.Controllers
                 ModelState.AddModelError("ToAccountNumber", "Source and destination account should be different");
                 return View();
 			}
-        }		
-	}
+        }
+
+        [HttpGet]
+        public IActionResult PaymentRTGS()
+        {
+            var accs = new SelectList(db.CustomerAccs.Where(s => s.Status == "Approved"), "AccountNumber", "AccountNumber");
+            var payeelist = new SelectList(db.AddPayees, "AccountNumber", "AccountNumber");
+
+            ViewBag.Payees = payeelist;
+            ViewBag.Accs = accs;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult PaymentRTGS(TransactionDetail transaction)
+        {
+            TransactionDetail td = new TransactionDetail();
+            td.AccountNumber = transaction.AccountNumber;
+            td.DebitCredit = "Debit";
+            td.ToAccountNumber = transaction.ToAccountNumber;
+            td.TransactionDate = System.DateTime.Now;
+            td.Maturityinstruct = transaction.Maturityinstruct;
+            td.TransactionType = "RTGS";
+            td.Amount = transaction.Amount;
+            td.TransactionId = GenerateRandomString(12);
+            db.TransactionDetails.Add(td);
+            (from customer in db.CustomerAccs
+             where customer.AccountNumber == transaction.ToAccountNumber
+             select customer).ToList().ForEach(x => x.TotalBalance = x.TotalBalance + transaction.Amount ?? 0);
+
+            (from customer in db.CustomerAccs
+             where customer.AccountNumber == transaction.AccountNumber
+             select customer).ToList().ForEach(x => x.TotalBalance = x.TotalBalance - transaction.Amount ?? 0);
+
+
+            db.SaveChanges();
+            return View("Index");
+        }
+    }
 }

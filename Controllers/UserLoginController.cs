@@ -15,7 +15,7 @@ namespace BankingManagementSystem.Controllers
         }
         public IActionResult Index()
         {
-           // List<Registration> registrationList = db.Registrations.ToList();
+            // List<Registration> registrationList = db.Registrations.ToList();
             List<RegisterNetBanking> registrationList = db.RegisterNetBankings.ToList();
             return View(registrationList);
         }
@@ -26,11 +26,11 @@ namespace BankingManagementSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(Registration reg)
+        public IActionResult Register(RegisterNetBanking reg)
         {
             if (ModelState.IsValid)
             {
-                db.Registrations.Add(reg);
+                db.RegisterNetBankings.Add(reg);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -57,7 +57,7 @@ namespace BankingManagementSystem.Controllers
                     TempData["username"] = obj.CustomerId.ToString();
                     TempData["password"] = obj.Passwordd.ToString();
                     return RedirectToAction("Index", "Dashboard");
-                    //HttpContext.Session.SetString("uid", obj.Id);
+                    HttpContext.Session.SetString("username", obj.CustomerId);
                 }
 				else
 				{
@@ -67,10 +67,13 @@ namespace BankingManagementSystem.Controllers
             }
             return View();
         }
- 
-        public IActionResult Dashboard()
-		{
-            return View();
-		}
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("username");
+            return RedirectToAction("Index");
+        }
+
     }
 }

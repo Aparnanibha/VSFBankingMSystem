@@ -1,8 +1,13 @@
-﻿@using static BankingManagementSystem.Models.TransactionDetail
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using static BankingManagementSystem.Models.TransactionDetail
 @model BankingManagementSystem.Models.TransactionDetail
 
 @{
-    ViewData["Title"] = "Payment";
+    ViewData["Title"] = "PaymentRTGS";
 }
 
 <h1>Payment</h1>
@@ -11,12 +16,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="PaymentNEFT">
+        <form asp-action="PaymentRTGS">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
             <div class="form-group">
                 @*<h1><label asp-for="TransactionType" class="control-label"></label></h1>*@
-                <label><h1>NEFT Payment</h1></label>
+                <label><h1>RTGS Payment</h1></label>
                 
                 @*<input asp-for="TransactionType" class="form-control" />*@
                 @*@Html.DropDownListFor(m=> m.TransactionType,new SelectList(Enum.GetValues(typeof(TransMode))),"Select Transaction Mode")*@
@@ -35,20 +40,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="AccountNumber" class="control-label"></label>
-                @*<select asp-for="AccountNumber" asp-items = "@(new SelectList(ViewBag.accs,"AccountNumber","AccountNumber"))" class = "form-control"></select>*@
-
                 <select asp-for="AccountNumber" class ="form-control" asp-items="ViewBag.Accs"></select>
             </div>
             <div class="form-group">
                 <label asp-for="ToAccountNumber" class="control-label"></label>
-                @*<select asp-for="ToAccountNumber" asp-items = "@(new SelectList(ViewBag.Payees,"AccountNumber","AccountNumber"))" class = "form-control"></select>
-                *@@*<input asp-for="ToAccountNumber" class="form-control" />
-                <span asp-validation-for="ToAccountNumber" class="text-danger"></span>*@
                 <select asp-for="ToAccountNumber" class ="form-control" asp-items="ViewBag.Payees"></select>
+                @*<input asp-for="ToAccountNumber" class="form-control" />
+                <span asp-validation-for="ToAccountNumber" class="text-danger"></span>*@
             </div>
             <div class="form-group">
                 <label asp-for="Amount" class="control-label"></label>
-                <input type="number" asp-for="Amount" class="form-control" min = "1" />
+                <input type="number" asp-for="Amount" required class="form-control" min = "1" max = "200000"/>
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
