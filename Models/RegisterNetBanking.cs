@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,7 +11,6 @@ namespace BankingManagementSystem.Models
         [Display(Name = "Account Number")]
         public decimal AccountNumber { get; set; }
 
-        [Key]
         [Display(Name = "UserId")]
         public string? CustomerId { get; set; }
 
@@ -38,6 +36,7 @@ namespace BankingManagementSystem.Models
         [Required(ErrorMessage = "Please enter confirm password")]
         [Compare("TransactionPassword", ErrorMessage = "Confirm password doesn't match, Type again !")]
         [DataType(DataType.Password)]
+        public string? ConTransactionPassword { get; set; }
 
         public virtual CustomerAcc AccountNumberNavigation { get; set; } = null!;
     }

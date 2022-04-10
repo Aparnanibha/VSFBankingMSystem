@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankingManagementSystem.Migrations
 {
     [DbContext(typeof(BankingManagementContext))]
-    [Migration("20220408122001_UpdateCustomerIddatatype")]
-    partial class UpdateCustomerIddatatype
+    [Migration("20220409092805_CustomerId")]
+    partial class CustomerId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,25 +37,6 @@ namespace BankingManagementSystem.Migrations
                     b.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("BankingManagementSystem.Models.AddPayee1", b =>
-                {
-                    b.Property<decimal>("AccountNumber")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("BeneficiaryAccountNumber")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("BeneficiaryName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NickName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AccountNumber", "BeneficiaryAccountNumber");
-
-                    b.ToTable("AddPayees", (string)null);
                 });
 
             modelBuilder.Entity("BankingManagementSystem.Models.AspNetRole", b =>
@@ -362,28 +343,30 @@ namespace BankingManagementSystem.Migrations
 
             modelBuilder.Entity("BankingManagementSystem.Models.RegisterNetBanking", b =>
                 {
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<decimal>("AccountNumber")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("CustomerAccAccountNumber")
                         .HasColumnType("numeric(12,0)");
+
+                    b.Property<string>("CustomerId")
+                        .HasMaxLength(12)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(12)");
 
                     b.Property<string>("Passwordd")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(40)");
 
                     b.Property<string>("TransactionPassword")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(40)");
 
-                    b.HasKey("CustomerId");
+                    b.HasKey("AccountNumber", "CustomerId")
+                        .HasName("PK__Register__24602B23768E2252");
 
-                    b.HasIndex("CustomerAccAccountNumber");
-
-                    b.ToTable("RegisterNetBankings");
+                    b.ToTable("RegisterNetBanking", (string)null);
                 });
 
             modelBuilder.Entity("BankingManagementSystem.Models.Registration", b =>
@@ -471,7 +454,8 @@ namespace BankingManagementSystem.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(40)");
 
-                    b.HasIndex("AccountNumber");
+                    b.HasKey("AccountNumber")
+                        .HasName("PK_123");
 
                     b.ToTable("AddPayee", (string)null);
                 });
@@ -547,9 +531,13 @@ namespace BankingManagementSystem.Migrations
 
             modelBuilder.Entity("BankingManagementSystem.Models.RegisterNetBanking", b =>
                 {
-                    b.HasOne("BankingManagementSystem.Models.CustomerAcc", null)
+                    b.HasOne("BankingManagementSystem.Models.CustomerAcc", "AccountNumberNavigation")
                         .WithMany("RegisterNetBankings")
-                        .HasForeignKey("CustomerAccAccountNumber");
+                        .HasForeignKey("AccountNumber")
+                        .IsRequired()
+                        .HasConstraintName("fk_AccNum");
+
+                    b.Navigation("AccountNumberNavigation");
                 });
 
             modelBuilder.Entity("BankingManagementSystem.Models.TransactionDetail", b =>
@@ -569,6 +557,8 @@ namespace BankingManagementSystem.Migrations
                     b.HasOne("BankingManagementSystem.Models.CustomerAcc", "AccountNumberNavigation")
                         .WithMany()
                         .HasForeignKey("AccountNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_AccNum_AddPay");
 
                     b.Navigation("AccountNumberNavigation");

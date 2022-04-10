@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using BankingManagementSystem.Data;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using BankingManagementSystem.Models;
 using VSFBankingSystem.Models;
 
 namespace BankingManagementSystem.Models
@@ -20,9 +17,7 @@ namespace BankingManagementSystem.Models
         {
         }
 
-
         public virtual DbSet<AddPayee> AddPayees { get; set; } = null!;
-       // public virtual DbSet<AddPayee1> AddPayees1 { get; set; } = null!;
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; } = null!;
         public virtual DbSet<AspNetRoleClaim> AspNetRoleClaims { get; set; } = null!;
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; } = null!;
@@ -48,14 +43,14 @@ namespace BankingManagementSystem.Models
         {
             modelBuilder.Entity<AddPayee>(entity =>
             {
-                entity.HasKey(e => e.AccountNumber)
+                entity.HasKey(e => e.BeneficiaryAccountNumber)
                     .HasName("PK_123");
 
                 entity.ToTable("AddPayee");
 
-                entity.Property(e => e.AccountNumber).HasColumnType("numeric(12, 0)");
-
                 entity.Property(e => e.BeneficiaryAccountNumber).HasColumnType("numeric(12, 0)");
+
+                entity.Property(e => e.AccountNumber).HasColumnType("numeric(12, 0)");
 
                 entity.Property(e => e.BeneficiaryName)
                     .HasMaxLength(40)
@@ -66,21 +61,10 @@ namespace BankingManagementSystem.Models
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.AccountNumberNavigation)
-                    .WithMany()
+                    .WithMany(p => p.AddPayees)
                     .HasForeignKey(d => d.AccountNumber)
                     .HasConstraintName("fk_AccNum_AddPay");
             });
-
-            //modelBuilder.Entity<AddPayee1>(entity =>
-            //{
-            //    entity.HasKey(e => new { e.AccountNumber, e.BeneficiaryAccountNumber });
-
-            //    entity.ToTable("AddPayees");
-
-            //    entity.Property(e => e.AccountNumber).HasColumnType("decimal(18, 2)");
-
-            //    entity.Property(e => e.BeneficiaryAccountNumber).HasColumnType("decimal(18, 2)");
-            //});
 
             modelBuilder.Entity<AspNetRole>(entity =>
             {
@@ -250,43 +234,47 @@ namespace BankingManagementSystem.Models
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
+                entity.Property(e => e.TotalBalance).HasColumnType("decimal(18, 2)");
+
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.CustomerAccs)
                     .HasForeignKey(d => d.CustomerId)
                     .HasConstraintName("fk_cust_ID");
             });
 
-            //modelBuilder.Entity<RegisterNetBanking>(entity =>
-            //{
-            //    entity.HasKey(e => new { e.AccountNumber, e.CustomerId })
-            //        .HasName("PK__Register__24602B23768E2252");
+            modelBuilder.Entity<RegisterNetBanking>(entity =>
+            {
+                entity.HasKey(e => new { e.AccountNumber, e.CustomerId })
+                    .HasName("PK__Register__24602B23768E2252");
 
-            //    entity.ToTable("RegisterNetBanking");
+                entity.ToTable("RegisterNetBanking");
 
-            //    entity.Property(e => e.AccountNumber).HasColumnType("numeric(12, 0)");
+                entity.Property(e => e.AccountNumber).HasColumnType("numeric(12, 0)");
 
-            //    entity.Property(e => e.CustomerId).HasColumnType("numeric(12, 0)");
+                entity.Property(e => e.CustomerId)
+                    .HasMaxLength(12)
+                    .IsUnicode(false);
 
-            //    entity.Property(e => e.Passwordd)
-            //        .HasMaxLength(40)
-            //        .IsUnicode(false);
+                entity.Property(e => e.Passwordd)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
 
-            //    entity.Property(e => e.TransactionPassword)
-            //        .HasMaxLength(40)
-            //        .IsUnicode(false);
+                entity.Property(e => e.TransactionPassword)
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
 
-            //    entity.HasOne(d => d.AccountNumberNavigation)
-            //        .WithMany(p => p.RegisterNetBankings)
-            //        .HasForeignKey(d => d.AccountNumber)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("fk_AccNum");
-            //});
+                entity.HasOne(d => d.AccountNumberNavigation)
+                    .WithMany(p => p.RegisterNetBankings)
+                    .HasForeignKey(d => d.AccountNumber)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_AccNum");
+            });
 
             modelBuilder.Entity<Registration>(entity =>
             {
                 entity.ToTable("registrations");
 
-                entity.Property(e => e.password).HasColumnName("password");
+                entity.Property(e => e.Password).HasColumnName("password");
             });
 
             modelBuilder.Entity<TransactionDetail>(entity =>
@@ -301,6 +289,8 @@ namespace BankingManagementSystem.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.AccountNumber).HasColumnType("numeric(12, 0)");
+
+                entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.Maturityinstruct)
                     .HasMaxLength(40)
@@ -324,7 +314,5 @@ namespace BankingManagementSystem.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-        public DbSet<BankingManagementSystem.Models.LoginVM> LoginVM { get; set; }
     }
 }
