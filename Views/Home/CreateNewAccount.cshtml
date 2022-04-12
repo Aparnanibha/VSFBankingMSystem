@@ -17,7 +17,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
+                <input asp-for="FirstName" class="form-control" data-val-required="First name is required"/>
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
+                <input asp-for="LastName" class="form-control" data-val-required="Last name is required"/>
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -47,32 +47,32 @@
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" />
+                <input asp-for="DateOfBirth" class="form-control" data-val-required="DOB is required" />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ResidentialAddress" class="control-label"></label>
-                <input asp-for="ResidentialAddress" class="form-control" />
+                <input asp-for="ResidentialAddress" class="form-control" data-val-required="PermanentAddress field is required" />
                 <span asp-validation-for="ResidentialAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PermanentAddress" class="control-label"></label>
-                <input asp-for="PermanentAddress" class="form-control" />
+                <input asp-for="PermanentAddress" class="form-control" data-val-required="PresentAddress field is required" />
                 <span asp-validation-for="PermanentAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OccupationType" class="control-label"></label>
-                <input asp-for="OccupationType" class="form-control" />
+                <input asp-for="OccupationType" class="form-control" data-val-required="Occupation PermanentAddress field is required required"/>
                 <span asp-validation-for="OccupationType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SourceOfIncome" class="control-label"></label>
-                <input asp-for="SourceOfIncome" class="form-control" />
+                <input asp-for="SourceOfIncome" class="form-control" data-val-required="SourceOfIncome field is required" />
                 <span asp-validation-for="SourceOfIncome" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GrossAnnualIncome" class="control-label"></label>
-                <input asp-for="GrossAnnualIncome" class="form-control" />
+                <input asp-for="GrossAnnualIncome" class="form-control" data-val-required="GrossIncome field is required" />
                 <span asp-validation-for="GrossAnnualIncome" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -87,7 +87,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="AadharNumber" class="control-label"></label>
-                <input type = "number"asp-for="AadharNumber" maxlength="16" class="form-control" />
+                <input type = "number"asp-for="AadharNumber" maxlength="16" class="form-control" data-val-required="Aadhar number is required" />
                 <span asp-validation-for="AadharNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
