@@ -12,7 +12,7 @@ namespace BankingManagementSystem.Data
         {
         }
 
-        public DbSet<Registration> registrations { get; set; }
+        //public DbSet<Registration> registrations { get; set; }
 
         public DbSet<AddPayee> AddPayees { get; set; }
 

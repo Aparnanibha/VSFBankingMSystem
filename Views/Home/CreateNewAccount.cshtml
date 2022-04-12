@@ -1,0 +1,106 @@
+﻿@model BankingManagementSystem.Models.Customer
+
+@{
+    ViewData["Title"] = "CreateNewAccount";
+}
+
+<h1>CreateNewAccount</h1>
+
+<h4>Customer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class = "text-danger">
+            @ViewBag.Message
+        </div>
+        <form asp-action="CreateNewAccount">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MiddleName" class="control-label"></label>
+                <input asp-for="MiddleName" class="form-control" />
+                <span asp-validation-for="MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FathersName" class="control-label"></label>
+                <input asp-for="FathersName" class="form-control" />
+                <span asp-validation-for="FathersName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MobileNumber" class="control-label"></label>
+                <input type = "number" asp-for="MobileNumber" maxlength = "12" class="form-control" />
+                <span asp-validation-for="MobileNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailId" class="control-label"></label>
+                <input asp-for="EmailId" class="form-control" />
+                <span asp-validation-for="EmailId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label"></label>
+                <input asp-for="DateOfBirth" class="form-control" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResidentialAddress" class="control-label"></label>
+                <input asp-for="ResidentialAddress" class="form-control" />
+                <span asp-validation-for="ResidentialAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PermanentAddress" class="control-label"></label>
+                <input asp-for="PermanentAddress" class="form-control" />
+                <span asp-validation-for="PermanentAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OccupationType" class="control-label"></label>
+                <input asp-for="OccupationType" class="form-control" />
+                <span asp-validation-for="OccupationType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SourceOfIncome" class="control-label"></label>
+                <input asp-for="SourceOfIncome" class="form-control" />
+                <span asp-validation-for="SourceOfIncome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrossAnnualIncome" class="control-label"></label>
+                <input asp-for="GrossAnnualIncome" class="form-control" />
+                <span asp-validation-for="GrossAnnualIncome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsDebitCardRequired" class="control-label"></label>
+                @Html.DropDownListFor(modelItem => modelItem.IsDebitCardRequired, new [] { new SelectListItem { Text = "Yes", Value="Yes" } , new SelectListItem { Text = "No", Value="No"} })
+                <span asp-validation-for="IsDebitCardRequired" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EnableNetBanking" class="control-label"></label>
+                @Html.DropDownListFor(modelItem => modelItem.EnableNetBanking, new [] { new SelectListItem { Text = "Yes", Value="Yes" } , new SelectListItem { Text = "No", Value="No"} })
+                <span asp-validation-for="EnableNetBanking" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AadharNumber" class="control-label"></label>
+                <input type = "number"asp-for="AadharNumber" maxlength="16" class="form-control" />
+                <span asp-validation-for="AadharNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

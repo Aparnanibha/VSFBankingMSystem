@@ -1,6 +1,7 @@
 ﻿using BankingManagementSystem.Data;
 using BankingManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankingManagementSystem.Controllers
 {
@@ -24,21 +25,27 @@ namespace BankingManagementSystem.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult Register(RegisterNetBanking reg)
         {
-            if (ModelState.IsValid)
+            RegisterNetBanking temp = new RegisterNetBanking();
+            var accsList = (from acc in db.CustomerAccs
+                            where acc.AccountNumber == reg.AccountNumber
+                            where acc.CustomerId == reg.CustomerId.ToString()
+                            select acc).FirstOrDefault();
+            if (accsList.AccountNumber == reg.AccountNumber && accsList.CustomerId == reg.CustomerId.ToString())
             {
-                db.RegisterNetBankings.Add(reg);
+                temp.AccountNumber = reg.AccountNumber;
+                temp.CustomerId = reg.CustomerId;
+                temp.Passwordd = reg.Passwordd;
+                temp.TransactionPassword = reg.TransactionPassword;
+
+                db.RegisterNetBankings.Add(temp);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //Redirect to Login page
+                return RedirectToAction("Dashboard", "Index");
             }
-            else
-            {
-                ModelState.AddModelError("", "Error Occured");
-            }
-            return View(reg);
+            return View();
         }
         public IActionResult Login()
         {
@@ -54,6 +61,7 @@ namespace BankingManagementSystem.Controllers
                 u.Passwordd.Equals(login.Password)).FirstOrDefault();
                 if (obj != null)
                 {
+                    
                     TempData["username"] = obj.CustomerId.ToString();
                     TempData["password"] = obj.Passwordd.ToString();
                     return RedirectToAction("Index", "Dashboard");
@@ -72,7 +80,30 @@ namespace BankingManagementSystem.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("username");
-            return RedirectToAction("Index");
+           // return RedirectToAction("logout");
+           return View();
+        }
+
+        public IActionResult ForgetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ForgetPassword(LoginVM loginVM)
+        {
+            try
+            {
+                var obj = db.RegisterNetBankings.Where(u => u.CustomerId == loginVM.UserId).FirstOrDefault();
+                obj.Passwordd = loginVM.Password;
+                db.Update(obj);
+                db.SaveChanges();
+                return RedirectToAction("Login");
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return View();
+            }
         }
 
     }
