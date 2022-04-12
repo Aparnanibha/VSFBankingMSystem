@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using VSFBankingSystem.Models;
+using BankingManagementSystem.Models;
 
 namespace BankingManagementSystem.Models
 {
@@ -27,7 +28,7 @@ namespace BankingManagementSystem.Models
         public virtual DbSet<Customer> Customers { get; set; } = null!;
         public virtual DbSet<CustomerAcc> CustomerAccs { get; set; } = null!;
         public virtual DbSet<RegisterNetBanking> RegisterNetBankings { get; set; } = null!;
-        public virtual DbSet<Registration> Registrations { get; set; } = null!;
+        //public virtual DbSet<Registration> Registrations { get; set; } = null!;
         public virtual DbSet<TransactionDetail> TransactionDetails { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -163,7 +164,9 @@ namespace BankingManagementSystem.Models
                     .HasMaxLength(12)
                     .IsUnicode(false);
 
-                entity.Property(e => e.AadharNumber).HasColumnType("numeric(16, 0)");
+                entity.Property(e => e.AadharNumber)
+                    .HasMaxLength(16)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.DateOfBirth).HasColumnType("date");
 
@@ -198,7 +201,9 @@ namespace BankingManagementSystem.Models
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
-                entity.Property(e => e.MobileNumber).HasColumnType("numeric(10, 0)");
+                entity.Property(e => e.MobileNumber)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.OccupationType)
                     .HasMaxLength(40)
@@ -270,12 +275,12 @@ namespace BankingManagementSystem.Models
                     .HasConstraintName("fk_AccNum");
             });
 
-            modelBuilder.Entity<Registration>(entity =>
-            {
-                entity.ToTable("registrations");
+            //modelBuilder.Entity<Registration>(entity =>
+            //{
+            //    entity.ToTable("registrations");
 
-                entity.Property(e => e.Password).HasColumnName("password");
-            });
+            //    entity.Property(e => e.password).HasColumnName("password");
+            //});
 
             modelBuilder.Entity<TransactionDetail>(entity =>
             {
@@ -314,5 +319,7 @@ namespace BankingManagementSystem.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<BankingManagementSystem.Models.LoginVM> LoginVM { get; set; }
     }
 }

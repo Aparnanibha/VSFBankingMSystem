@@ -57,17 +57,6 @@ namespace BankingManagementSystem.Controllers
         [HttpPost]
         public IActionResult ChangePassword(string id, [Bind(include: "AccountNumber,CustomerId,TransactionPassword,Passwordd")] RegisterNetBanking registerNetBanking)
         {
-            //RegisterNetBanking temp = new RegisterNetBanking();
-            //var reg = (from rcd in _db.RegisterNetBankings
-            //           where rcd.AccountNumber == 500102300208
-            //temp.AccountNumber = pwd.AccountNumber;
-            //temp.Passwordd = pwd.Passwordd;
-            //temp.TransactionPassword = reg.TransactionPassword;
-            //temp.CustomerId = reg.CustomerId;
-            //_db.Update(pwd);
-            //_db.SaveChanges();       
-
-            //return View("Dashboard");
             try
             {
                 db.Entry(registerNetBanking).State = EntityState.Modified;

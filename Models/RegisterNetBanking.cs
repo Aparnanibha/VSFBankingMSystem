@@ -15,6 +15,7 @@ namespace BankingManagementSystem.Models
         public string? CustomerId { get; set; }
 
         [Required]
+        [Range(8, 16, ErrorMessage = "Password should be 8 to 16 characters")]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         public string? Passwordd { get; set; }
@@ -27,6 +28,7 @@ namespace BankingManagementSystem.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
+        [Range(4, 6, ErrorMessage = "Transaction Password should be 4 to 8 characters")]
         [Display(Name = "Transaction Password")]
         [DataType(DataType.Password)]
         public string? TransactionPassword { get; set; }
