@@ -43,7 +43,7 @@ namespace BankingManagementSystem.Controllers
                 db.RegisterNetBankings.Add(temp);
                 db.SaveChanges();
                 //Redirect to Login page
-                return RedirectToAction("Dashboard", "Index");
+                return RedirectToAction("Login", "User");
             }
             return View();
         }

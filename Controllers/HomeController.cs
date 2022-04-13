@@ -95,7 +95,7 @@ namespace BankingManagementSystem.Controllers
         {
 
             var builder = new StringBuilder();
-            while (builder.Length < 16)
+            while (builder.Length < 11)
             {
                 builder.Append(RNG.Next(10).ToString());
             }

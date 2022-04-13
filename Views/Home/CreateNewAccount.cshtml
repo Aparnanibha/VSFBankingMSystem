@@ -1,106 +1,118 @@
 ﻿@model BankingManagementSystem.Models.Customer
 
 @{
-    ViewData["Title"] = "CreateNewAccount";
+	ViewData["Title"] = "CreateNewAccount";
+
 }
 
-<h1>CreateNewAccount</h1>
+<h1 class="text-center">Create New Account</h1>
 
-<h4>Customer</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <div class = "text-danger">
-            @ViewBag.Message
-        </div>
-        <form asp-action="CreateNewAccount">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" data-val-required="First name is required"/>
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MiddleName" class="control-label"></label>
-                <input asp-for="MiddleName" class="form-control" />
-                <span asp-validation-for="MiddleName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" data-val-required="Last name is required"/>
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FathersName" class="control-label"></label>
-                <input asp-for="FathersName" class="form-control" />
-                <span asp-validation-for="FathersName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MobileNumber" class="control-label"></label>
-                <input type = "number" asp-for="MobileNumber" maxlength = "12" class="form-control" />
-                <span asp-validation-for="MobileNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmailId" class="control-label"></label>
-                <input asp-for="EmailId" class="form-control" />
-                <span asp-validation-for="EmailId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" data-val-required="DOB is required" />
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ResidentialAddress" class="control-label"></label>
-                <input asp-for="ResidentialAddress" class="form-control" data-val-required="PermanentAddress field is required" />
-                <span asp-validation-for="ResidentialAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PermanentAddress" class="control-label"></label>
-                <input asp-for="PermanentAddress" class="form-control" data-val-required="PresentAddress field is required" />
-                <span asp-validation-for="PermanentAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OccupationType" class="control-label"></label>
-                <input asp-for="OccupationType" class="form-control" data-val-required="Occupation PermanentAddress field is required required"/>
-                <span asp-validation-for="OccupationType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SourceOfIncome" class="control-label"></label>
-                <input asp-for="SourceOfIncome" class="form-control" data-val-required="SourceOfIncome field is required" />
-                <span asp-validation-for="SourceOfIncome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="GrossAnnualIncome" class="control-label"></label>
-                <input asp-for="GrossAnnualIncome" class="form-control" data-val-required="GrossIncome field is required" />
-                <span asp-validation-for="GrossAnnualIncome" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IsDebitCardRequired" class="control-label"></label>
-                @Html.DropDownListFor(modelItem => modelItem.IsDebitCardRequired, new [] { new SelectListItem { Text = "Yes", Value="Yes" } , new SelectListItem { Text = "No", Value="No"} })
-                <span asp-validation-for="IsDebitCardRequired" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EnableNetBanking" class="control-label"></label>
-                @Html.DropDownListFor(modelItem => modelItem.EnableNetBanking, new [] { new SelectListItem { Text = "Yes", Value="Yes" } , new SelectListItem { Text = "No", Value="No"} })
-                <span asp-validation-for="EnableNetBanking" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AadharNumber" class="control-label"></label>
-                <input type = "number"asp-for="AadharNumber" maxlength="16" class="form-control" data-val-required="Aadhar number is required" />
-                <span asp-validation-for="AadharNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+	<div class="col-md-4">
+		<div class="text-danger">
+			@ViewBag.Message
+		</div>
+		<form asp-action="CreateNewAccount">
+			@*<div class="login-container row bg-light text-black" style="left:35%; position:absolute; height:175%">
+				<div class="col-sm-12">*@
+			<div class="container row bg-light text-White h-auto">
+				<div class="col-sm-12">
+					<div class="First" style="left:20%; position:absolute">
+						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+						<div class="form-group">
+							<label asp-for="FirstName" class="control-label"></label>
+							<input asp-for="FirstName" class="form-control" data-val-required="First name is required" />
+							<span asp-validation-for="FirstName" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="MiddleName" class="control-label"></label>
+							<input asp-for="MiddleName" class="form-control" />
+							<span asp-validation-for="MiddleName" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="LastName" class="control-label"></label>
+							<input asp-for="LastName" class="form-control" data-val-required="Last name is required" />
+							<span asp-validation-for="LastName" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="FathersName" class="control-label"></label>
+							<input asp-for="FathersName" class="form-control" />
+							<span asp-validation-for="FathersName" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="MobileNumber" class="control-label"></label>
+							<input type="number" asp-for="MobileNumber" maxlength="12" class="form-control" />
+							<span asp-validation-for="MobileNumber" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="EmailId" class="control-label"></label>
+							<input asp-for="EmailId" class="form-control" />
+							<span asp-validation-for="EmailId" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="DateOfBirth" class="control-label"></label>
+							<input asp-for="DateOfBirth" class="form-control" data-val-required="DOB is required" />
+							<span asp-validation-for="DateOfBirth" class="text-danger"></span>
+						</div>
+
+
+						<div class="form-group">
+							<label asp-for="ResidentialAddress" class="control-label"></label>
+							<input asp-for="ResidentialAddress" class="form-control" data-val-required="PermanentAddress field is required" />
+							<span asp-validation-for="ResidentialAddress" class="text-danger"></span>
+						</div>
+					</div>
+					<div class="Second" style="right: 20%; position:absolute; width:21%">
+						<div class="form-group">
+							<label asp-for="PermanentAddress" class="control-label"></label>
+							<input asp-for="PermanentAddress" class="form-control" data-val-required="PresentAddress field is required" />
+							<span asp-validation-for="PermanentAddress" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="OccupationType" class="control-label"></label>
+							<input asp-for="OccupationType" class="form-control" data-val-required="Occupation PermanentAddress field is required required" />
+							<span asp-validation-for="OccupationType" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="SourceOfIncome" class="control-label"></label>
+							<input asp-for="SourceOfIncome" class="form-control" data-val-required="SourceOfIncome field is required" />
+							<span asp-validation-for="SourceOfIncome" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="GrossAnnualIncome" class="control-label"></label>
+							<input asp-for="GrossAnnualIncome" class="form-control" data-val-required="GrossIncome field is required" />
+							<span asp-validation-for="GrossAnnualIncome" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="IsDebitCardRequired" class="control-label"></label>
+							@Html.DropDownListFor(modelItem => modelItem.IsDebitCardRequired, new [] { new SelectListItem { Text = "Yes", Value="Yes" } , new SelectListItem { Text = "No", Value="No"} })
+							<span asp-validation-for="IsDebitCardRequired" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="EnableNetBanking" class="control-label"></label>
+							@Html.DropDownListFor(modelItem => modelItem.EnableNetBanking, new [] { new SelectListItem { Text = "Yes", Value="Yes" } , new SelectListItem { Text = "No", Value="No"} })
+							<span asp-validation-for="EnableNetBanking" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="AadharNumber" class="control-label"></label>
+							<input type="number" asp-for="AadharNumber" maxlength="16" class="form-control" data-val-required="Aadhar number is required" />
+							<span asp-validation-for="AadharNumber" class="text-danger"></span>
+						</div>
+					</div>
+
+					<div class="form-group" style="left:65%; position:absolute; bottom:-15%">
+						<input type="submit" value="Create" class="btn btn-primary" />
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+	await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

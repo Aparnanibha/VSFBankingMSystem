@@ -14,7 +14,7 @@ namespace BankingManagementSystem.Models
         public string CustomerId { get; set; } = null!;
 
        // [Required]
-        [Range(1, 16, ErrorMessage = "First name is too short or too long! Please Enter Valid Details")]
+       // [Range(1, 16, ErrorMessage = "First name is too short or too long! Please Enter Valid Details")]
         [Display(Name = "Enter Your First Name")]
         public string? FirstName { get; set; }
 
@@ -23,7 +23,7 @@ namespace BankingManagementSystem.Models
 
        // [Required]
         [Display(Name = "Enter Your Last Name")]
-        [Range(1, 16, ErrorMessage = "Last name is too short or too long! Please enter valid details")]
+      //  [Range(1, 16, ErrorMessage = "Last name is too short or too long! Please enter valid details")]
         public string? LastName { get; set; }
 
         [Display(Name = "Enter Your Father's Full Name")]
